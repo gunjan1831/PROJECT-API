@@ -11,4 +11,3 @@ def movie_list(request):
     }
     return JsonResponse(data)
 
-hyyyyy.
