@@ -1,6 +1,6 @@
 
-from django.shortcuts import render
-from movielist_app.models import Movie
+#....from django.shortcuts import render
+"""from movielist_app.models import Movie
 from django.http import JsonResponse
 
 
@@ -19,4 +19,4 @@ def movie_details(request,pk):
         'active': movie.activate
 
     }
-    return JsonResponse(data)
+    return JsonResponse(data)"""
