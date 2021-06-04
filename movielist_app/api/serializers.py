@@ -18,3 +18,16 @@ class MovieSerializer(serializers.Serializer):
         instance.activate = validated_data.get('activate', instance.activate)
         instance.save()
         return instance
+
+    def validate(self,data):
+        if data['name']==data['description']:   #desc and title should not be same chekcing for objects based validation
+            raise serializers.ValidationError("Title and Description cannot be same ")
+        else:
+            return data
+
+    def validate_name(self,value):
+
+        if len(value) <2:
+            raise serializers.ValidationError("Movie Name Not Valid")
+        else:
+            return value
