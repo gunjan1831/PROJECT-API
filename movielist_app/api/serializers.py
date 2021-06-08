@@ -1,25 +1,24 @@
 from rest_framework import serializers
-from movielist_app.models import Movie
+from movielist_app.models import WatchList,StreamPlatform
 
 
 #model serialisers
 
-class MovieSerializer(serializers.ModelSerializer):
+class StreamPlatformSerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = Movie
+        model = StreamPlatform
         fields = "__all__"
-    def validate(self,data):
-        if data['name'] == data['description']:   #desc and title should not be same chekcing for objects based validation
-            raise serializers.ValidationError("Title and Description cannot be same ")
-        else:
-            return data
 
-    def validate_name(self,value):
 
-        if len(value) <2:
-            raise serializers.ValidationError("Movie Name Not Valid")
-        else:
-            return value
+
+
+class WatchListSerializer(serializers.ModelSerializer):
+
+
+    class Meta:
+        model = WatchList
+        fields = "__all__"
 
 
 
