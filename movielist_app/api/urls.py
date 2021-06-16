@@ -1,8 +1,17 @@
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework.routers import DefaultRouter
 #from movielist_app.api.views import movie_list,movie_details
 
-from movielist_app.api.views import WatchDetailsAV, WatchListAV,StreamPlatformAV,StreamPlatformDetailsAV,ReviewList,ReviewDetails,ReviewCreate
+
+
+from movielist_app.api.views import (WatchDetailsAV, WatchListAV,StreamPlatformAV,StreamPlatformDetailsAV,ReviewList,
+                                        ReviewDetails,ReviewCreate,StreamPlatformVS)
+
+
+router = DefaultRouter()
+router.register('stream',StreamPlatformVS, basename = 'streamplatform')
+
 
 
 
@@ -10,8 +19,11 @@ urlpatterns = [
 
     path('lists/', WatchListAV.as_view(),name='movie_list'),
     path('<int:pk>',WatchDetailsAV.as_view(),name='movie_details'),
-    path('stream/<int:pk>',StreamPlatformDetailsAV.as_view(),name='stream-detail'),
-    path('stream/', StreamPlatformAV.as_view(), name='stream'),
+
+    path('', include(router.urls)),
+
+    # path('stream/<int:pk>',StreamPlatformDetailsAV.as_view(),name='stream-detail'),
+    # path('stream/', StreamPlatformAV.as_view(), name='stream'),
 
      path('stream/<int:pk>/review-create', ReviewCreate.as_view(), name='review-create'),
      path('stream/<int:pk>/review', ReviewList.as_view(), name='review-list'),
