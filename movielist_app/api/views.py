@@ -7,10 +7,28 @@ from rest_framework import status
 from rest_framework import generics
 # from rest_framework import mixins
 
+class ReviewCreate(generics.CreateAPIView):  #review for a particular movie.
+    serializer_class = ReviewSerializer
+
+    def perform_create(self):
+        pk = self.kwargs.get('pk')
+        watchlist = WatchList.objects.get(pk=pk)
+
+
+        serializer.save(watchlist=watchlist)
+
 
 class ReviewList(generics.ListCreateAPIView):
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
+   serializer_class = ReviewSerializer
+
+
+   def get_queryset(self):
+       pk = self.kwargs['pk']
+       return Review.objects.filter(watchlist=pk)
+
+
+
+
 
 
 class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
